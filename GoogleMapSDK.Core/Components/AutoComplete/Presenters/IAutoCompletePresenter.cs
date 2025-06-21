@@ -1,11 +1,11 @@
-﻿using GoogleMapSDK.Contract.AutoComplete.Models;
+﻿using GoogleMapSDK.Contract.Components.AutoComplete.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GoogleMapSDK.Core.AutoComplete.Presenters
+namespace GoogleMapSDK.Core.Components.AutoComplete.Presenters
 {
     public interface IAutoCompletePresenter<T>
     {

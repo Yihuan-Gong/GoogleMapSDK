@@ -2,7 +2,7 @@
 using GoogleMapSDK.API.Places.Models;
 using GoogleMapSDK.API.Places.Requests.Models;
 using GoogleMapSDK.Contract.API;
-using GoogleMapSDK.Contract.AutoComplete.Models;
+using GoogleMapSDK.Contract.Components.AutoComplete.Models;
 using GoogleMapSDK.Contract.Models;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GoogleMapSDK.Core.AutoComplete.Models
+namespace GoogleMapSDK.Core.Components.AutoComplete.Models
 {
     public class GoogleMapAutoCompleteConfig : IAutoCompleteConfig<PlaceSimpleModel>
     {

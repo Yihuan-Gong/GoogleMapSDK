@@ -1,6 +1,6 @@
-﻿using GoogleMapSDK.Contract.AutoComplete.Models;
-using GoogleMapSDK.Contract.AutoComplete.Views;
-using GoogleMapSDK.Core.AutoComplete.Presenters;
+﻿using GoogleMapSDK.Contract.Components.AutoComplete.Models;
+using GoogleMapSDK.Contract.Components.AutoComplete.Views;
+using GoogleMapSDK.Core.Components.AutoComplete.Presenters;
 using MVPExtension;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GoogleMapSDK.Core.AutoComplete.ViewLogic
+namespace GoogleMapSDK.Core.Components.AutoComplete.ViewLogic
 {
     public class AutoCompleteViewLogic<T> : IAutoCompleteViewLogic<T>
     {

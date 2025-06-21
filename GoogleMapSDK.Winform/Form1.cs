@@ -1,4 +1,4 @@
-﻿using GoogleMapSDK.Contract.AutoComplete.Views;
+﻿using GoogleMapSDK.Contract.Components.AutoComplete.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

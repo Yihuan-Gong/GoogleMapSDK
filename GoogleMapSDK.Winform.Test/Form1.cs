@@ -1,6 +1,6 @@
-﻿using GoogleMapSDK.Contract.AutoComplete.Views;
+﻿using GoogleMapSDK.Contract.Components.AutoComplete.Views;
 using GoogleMapSDK.Contract.Models;
-using GoogleMapSDK.Core.AutoComplete.Models;
+using GoogleMapSDK.Core.Components.AutoComplete.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

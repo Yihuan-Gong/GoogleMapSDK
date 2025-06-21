@@ -1,5 +1,5 @@
 ﻿using GoogleMapSDK.API.Extensions;
-using GoogleMapSDK.Core.AutoComplete.Models;
+using GoogleMapSDK.Core.Components.AutoComplete.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MVPExtension;

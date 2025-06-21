@@ -1,12 +1,12 @@
-﻿using GoogleMapSDK.Contract.AutoComplete.Models;
-using GoogleMapSDK.Core.AutoComplete.ViewLogic;
+﻿using GoogleMapSDK.Contract.Components.AutoComplete.Models;
+using GoogleMapSDK.Core.Components.AutoComplete.ViewLogic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GoogleMapSDK.Core.AutoComplete.Actions
+namespace GoogleMapSDK.Core.Components.AutoComplete.Actions
 {
     internal abstract class AAutoCompleteAction<T>
     {

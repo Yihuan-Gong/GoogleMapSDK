@@ -109,7 +109,7 @@
     </Compile>
     <Compile Include="Components\GoogleMap\Utilities\MemberCopier.cs" />
     <Compile Include="Extensions\WinformRegistrationExtension.cs" />
-    <Compile Include="AutoComplete\Views\AutoCompleteTextBoxView.cs">
+    <Compile Include="Components\AutoComplete\Views\AutoCompleteTextBoxView.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Form1.cs">

@@ -1,5 +1,5 @@
-﻿using GoogleMapSDK.Contract.AutoComplete.Views;
-using GoogleMapSDK.Contract.AutoComplete.Models;
+﻿using GoogleMapSDK.Contract.Components.AutoComplete.Views;
+using GoogleMapSDK.Contract.Components.AutoComplete.Models;
 using MVPExtension;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DTO;
 
-namespace GoogleMapSDK.Winform.AutoComplete.Views
+namespace GoogleMapSDK.Winform.Components.AutoComplete.Views
 {
     public class AutoCompleteTextBoxView<T> : TextBox, IAutoCompleteView<T>
     {
@@ -95,7 +95,7 @@ namespace GoogleMapSDK.Winform.AutoComplete.Views
         {
             viewLogic.ChangeSelectedIndex(_listBox.SelectedIndex);
             viewLogic.KeyDown(
-                new Mapper<System.Windows.Forms.Keys, Contract.AutoComplete.Models.Keys>()
+                new Mapper<System.Windows.Forms.Keys, Contract.Components.AutoComplete.Models.Keys>()
                 .Map(System.Windows.Forms.Keys.Enter));
         }
 
@@ -108,7 +108,7 @@ namespace GoogleMapSDK.Winform.AutoComplete.Views
         private void ThisKeyDown(object sender, KeyEventArgs e)
         {
             viewLogic.KeyDown(
-                new Mapper<System.Windows.Forms.Keys, Contract.AutoComplete.Models.Keys>()
+                new Mapper<System.Windows.Forms.Keys, Contract.Components.AutoComplete.Models.Keys>()
                 .Map(e.KeyCode));
         }
     }

@@ -83,15 +83,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoComplete\Actions\AAutoCompleteAction.cs" />
-    <Compile Include="AutoComplete\Actions\DecreaseSelectedIndex.cs" />
-    <Compile Include="AutoComplete\Actions\ExcuteAutoComplete.cs" />
-    <Compile Include="AutoComplete\Actions\FindMatchedList.cs" />
-    <Compile Include="AutoComplete\Actions\IncreaseSelectedIndex.cs" />
-    <Compile Include="AutoComplete\Models\GoogleMapAutoCompleteConfig.cs" />
-    <Compile Include="AutoComplete\Presenters\AutoCompletePresenter.cs" />
-    <Compile Include="AutoComplete\Presenters\IAutoCompletePresenter.cs" />
-    <Compile Include="AutoComplete\ViewLogic\AutoCompleteViewLogic.cs" />
+    <Compile Include="Components\AutoComplete\Actions\AAutoCompleteAction.cs" />
+    <Compile Include="Components\AutoComplete\Actions\DecreaseSelectedIndex.cs" />
+    <Compile Include="Components\AutoComplete\Actions\ExcuteAutoComplete.cs" />
+    <Compile Include="Components\AutoComplete\Actions\FindMatchedList.cs" />
+    <Compile Include="Components\AutoComplete\Actions\IncreaseSelectedIndex.cs" />
+    <Compile Include="Components\AutoComplete\Models\GoogleMapAutoCompleteConfig.cs" />
+    <Compile Include="Components\AutoComplete\Presenters\AutoCompletePresenter.cs" />
+    <Compile Include="Components\AutoComplete\Presenters\IAutoCompletePresenter.cs" />
+    <Compile Include="Components\AutoComplete\ViewLogic\AutoCompleteViewLogic.cs" />
     <Compile Include="Extensions\CoreRegistrationExtension.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

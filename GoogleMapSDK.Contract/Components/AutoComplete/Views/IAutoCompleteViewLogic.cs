@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GoogleMapSDK.Contract.AutoComplete.Models;
+using GoogleMapSDK.Contract.Components.AutoComplete.Models;
 
-namespace GoogleMapSDK.Contract.AutoComplete.Views
+namespace GoogleMapSDK.Contract.Components.AutoComplete.Views
 {
     public interface IAutoCompleteViewLogic<T>
     {
