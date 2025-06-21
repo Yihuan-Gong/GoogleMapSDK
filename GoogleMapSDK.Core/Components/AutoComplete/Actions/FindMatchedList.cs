@@ -21,6 +21,9 @@ namespace GoogleMapSDK.Core.Components.AutoComplete.Actions
 
         public async Task ExcuteAsync()
         {
+            if (_actionModel.Text == string.Empty)
+                return;
+            
             if (_actionModel.Text == _actionModel.FormerText) 
                 return;
             _actionModel.FormerText = _actionModel.Text;
@@ -35,8 +38,9 @@ namespace GoogleMapSDK.Core.Components.AutoComplete.Actions
             _actionModel.Values = await _actionModel.ValuesTask;
             _actionModel.Matched = _actionModel.Values.Keys.Where(x =>
             {
-                return x.StartsWith(_actionModel.Text, StringComparison.OrdinalIgnoreCase) &&
-                    excludeText != x;
+                // 用.Contains比對比.StartsWith比對更符合GoogleMap模糊搜尋的運作方式
+                // x.StartsWith(_actionModel.Text, StringComparison.CurrentCultureIgnoreCase)
+                return x.ToLower().Contains(_actionModel.Text.ToLower()) && excludeText != x;
             }).ToList();
 
             if (_actionModel.Matched.Count == 0)

@@ -9,8 +9,8 @@ namespace GoogleMapSDK.Contract.API.Services
 {
     public interface IPlaceService
     {
-        Task<PlaceDetailModel> TextSearchAsync(string query);
-        Task<PlaceDetailModel> NearbySearchAsync(CircleModel locationRestriction, string[] includedTypes = null, int? maxResultCounts = null);
-        Task<List<PlaceSimpleModel>> AutoCompleteAsync(string input, CircleModel locationRestriction = null);
+        Task<PlaceDetailModel> TextSearchAsync(string query, string languageCode = "zh-TW");
+        Task<PlaceDetailModel> NearbySearchAsync(CircleModel locationRestriction, string[] includedTypes = null, int? maxResultCounts = null, string languageCode = "zh-TW");
+        Task<List<PlaceSimpleModel>> AutoCompleteAsync(string input, CircleModel locationRestriction = null, string languageCode = "zh-TW");
     }
 }

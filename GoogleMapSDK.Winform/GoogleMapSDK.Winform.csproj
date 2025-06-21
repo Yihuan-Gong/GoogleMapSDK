@@ -108,6 +108,7 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Components\GoogleMap\Utilities\MemberCopier.cs" />
+    <Compile Include="Extensions\ControlExtension.cs" />
     <Compile Include="Extensions\WinformRegistrationExtension.cs" />
     <Compile Include="Components\AutoComplete\Views\AutoCompleteTextBoxView.cs">
       <SubType>Component</SubType>

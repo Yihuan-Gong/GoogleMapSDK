@@ -24,6 +24,7 @@ namespace GoogleMapSDK.API.Places.Requests.Models
 
         public string Input { get; }
         public LocationBiasModel LocationBias { get; } = null;
+        public string LanguageCode { get; set; } = "zh-TW";
     }
 
     public class LocationBiasModel

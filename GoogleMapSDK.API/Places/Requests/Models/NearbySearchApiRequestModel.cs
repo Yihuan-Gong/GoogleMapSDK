@@ -18,5 +18,6 @@ namespace GoogleMapSDK.API.Places.Requests.Models
         public CircleModel LocationRestriction { get; }
         public string[] IncludedTypes { get; set; } = null;
         public int? MaxResultCounts { get; set; } = null;
+        public string LanguageCode { get; set; } = "zh-TW";
     }
 }

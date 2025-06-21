@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DTO;
+using GoogleMapSDK.Winform.Extensions;
 
 namespace GoogleMapSDK.Winform.Components.AutoComplete.Views
 {
@@ -101,8 +102,11 @@ namespace GoogleMapSDK.Winform.Components.AutoComplete.Views
 
         private async void ThisKeyUp(object sender, KeyEventArgs e)
         {
-            viewLogic.Values = config.GetValuesAsync(Text);
-            await viewLogic.KeyUpAsync(Text);
+            this.DebounceHandler(async () =>
+            {
+                viewLogic.Values = config.GetValuesAsync(Text);
+                await viewLogic.KeyUpAsync(Text);
+            }, debounceTime: 500);
         }
 
         private void ThisKeyDown(object sender, KeyEventArgs e)

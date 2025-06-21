@@ -9,5 +9,6 @@ namespace GoogleMapSDK.API.Places.Requests.Models
     internal class TextSearchApiRequestModel
     {
         public string Query { get; set; }
+        public string LanguageCode { get; set; } = "zh-TW";
     }
 }

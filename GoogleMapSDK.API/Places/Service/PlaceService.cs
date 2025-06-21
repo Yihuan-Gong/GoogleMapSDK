@@ -23,29 +23,34 @@ namespace GoogleMapSDK.API.Places
         {
         }
 
-        public async Task<PlaceDetailModel> TextSearchAsync(string query)
+        public async Task<PlaceDetailModel> TextSearchAsync(string query, string languageCode = "zh-TW")
         {
             var result = await SendRequestAsync<TextSearchRequest, TextSearchApiRequestModel, PlaceDetailApiResponseModel>(new TextSearchApiRequestModel
             {
-                Query = query
+                Query = query,
+                LanguageCode = languageCode
             });
             return result.GetPlaceDetail();
         }
 
-        public async Task<PlaceDetailModel> NearbySearchAsync(CircleModel locationRestriction, string[] includedTypes = null, int? maxResultCounts = null)
+        public async Task<PlaceDetailModel> NearbySearchAsync(CircleModel locationRestriction, string[] includedTypes = null, int? maxResultCounts = null, string languageCode = "zh-TW")
         {
             var apiRequestData = new NearbySearchApiRequestModel(locationRestriction)
             {
                 IncludedTypes = includedTypes,
-                MaxResultCounts = maxResultCounts
+                MaxResultCounts = maxResultCounts,
+                LanguageCode = languageCode
             };
             var result = await SendRequestAsync<NearbySearchRequest, NearbySearchApiRequestModel, PlaceDetailApiResponseModel>(apiRequestData);
             return result.GetPlaceDetail();
         }
 
-        public async Task<List<PlaceSimpleModel>> AutoCompleteAsync(string input, CircleModel locationRestriction = null)
+        public async Task<List<PlaceSimpleModel>> AutoCompleteAsync(string input, CircleModel locationRestriction = null, string languageCode = "zh-TW")
         {
-            var apiRequestData = new AutoCompleteApiRequestModel(input, locationRestriction);
+            var apiRequestData = new AutoCompleteApiRequestModel(input, locationRestriction)
+            {
+                LanguageCode = languageCode
+            };
             var result = await SendRequestAsync<AutoCompleteRequest, AutoCompleteApiRequestModel, PlaceAutoCompleteApiResponseModel>(apiRequestData);
             return result.GetPlaceSuggestions();
         }
