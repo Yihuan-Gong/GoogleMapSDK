@@ -16,7 +16,7 @@ namespace GoogleMapSDK.API.Places.Models
         {
             CheckSucussesOrThrowException();
 
-            return Suggestions.Select(x => new PlaceSimpleModel(GoogleMapAPI)
+             return Suggestions.Select(x => new PlaceSimpleModel(GoogleMapAPI)
             {
                 Id = x.PlacePrediction.PlaceId,
                 Name = x.PlacePrediction.Text.Text,

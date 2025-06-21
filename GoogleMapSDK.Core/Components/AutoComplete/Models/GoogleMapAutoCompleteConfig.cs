@@ -1,7 +1,4 @@
-﻿using GoogleMapSDK.API;
-using GoogleMapSDK.API.Places.Models;
-using GoogleMapSDK.API.Places.Requests.Models;
-using GoogleMapSDK.Contract.API;
+﻿using GoogleMapSDK.Contract.API;
 using GoogleMapSDK.Contract.Components.AutoComplete.Models;
 using GoogleMapSDK.Contract.Models;
 using System;

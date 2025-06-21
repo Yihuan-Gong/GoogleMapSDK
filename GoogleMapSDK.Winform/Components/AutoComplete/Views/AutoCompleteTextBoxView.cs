@@ -95,9 +95,7 @@ namespace GoogleMapSDK.Winform.Components.AutoComplete.Views
         private void ListBoxMouseClick(object sender, MouseEventArgs e)
         {
             viewLogic.ChangeSelectedIndex(_listBox.SelectedIndex);
-            viewLogic.KeyDown(
-                new Mapper<System.Windows.Forms.Keys, Contract.Components.AutoComplete.Models.Keys>()
-                .Map(System.Windows.Forms.Keys.Enter));
+            viewLogic.KeyDown(Contract.Components.AutoComplete.Models.Keys.Enter);
         }
 
         private async void ThisKeyUp(object sender, KeyEventArgs e)
