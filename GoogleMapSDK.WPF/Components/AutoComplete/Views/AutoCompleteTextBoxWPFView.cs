@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows;
 using DTO;
 using GoogleMapSDK.WPF.Extensions;
+using System.Windows.Controls.Primitives;
 
 namespace GoogleMapSDK.WPF.Components.AutoComplete.Views
 {
@@ -16,12 +17,14 @@ namespace GoogleMapSDK.WPF.Components.AutoComplete.Views
     {
         protected readonly IAutoCompleteViewLogic<T> _viewLogic;
         protected IAutoCompleteConfig<T> _config;
+        private Popup _popup;
         private ListBox _listBox;
         private bool _isAdded;
 
         public AutoCompleteTextBoxWPFView(IServiceProvider serviceProvider)
         {
             _viewLogic = serviceProvider.CreatePresenter<IAutoCompleteViewLogic<T>, AutoCompleteTextBoxWPFView<T>>(this);
+            
             InitializeComponent();
         }
 
@@ -39,33 +42,18 @@ namespace GoogleMapSDK.WPF.Components.AutoComplete.Views
 
         public void ViewLogicHideAutoCompleteBox()
         {
-            if (_listBox != null)
-            {
-                _listBox.Visibility = Visibility.Collapsed;
-            }
+            _popup.IsOpen = false;
         }
 
         public void ViewLogicMathcedListFound(List<string> matched)
         {
-            if (!_isAdded)
-            {
-                if (Parent is Panel parentPanel)
-                {
-                    parentPanel.Children.Add(_listBox);
-                    _isAdded = true;
-                }
-                else
-                {
-                    throw new InvalidOperationException("Parent must be a Panel to add ListBox dynamically.");
-                }
-            }
-
             _listBox.ItemsSource = matched;
-            _listBox.Visibility = Visibility.Visible;
             _listBox.Width = Width;
 
             double itemHeight = 20;
             _listBox.Height = (matched.Count + 1) * itemHeight;
+
+            _popup.IsOpen = true;
         }
 
         public void ViewLogicSelectedIndexChanged(int index)
@@ -76,11 +64,17 @@ namespace GoogleMapSDK.WPF.Components.AutoComplete.Views
 
         private void InitializeComponent()
         {
-            _listBox = new ListBox
-            {
-                Visibility = Visibility.Collapsed
-            };
+            _listBox = new ListBox();
             _listBox.MouseLeftButtonUp += ListBoxMouseLeftButtonClicked;
+
+            _popup = new Popup
+            {
+                PlacementTarget = this,
+                Placement = PlacementMode.Bottom,
+                StaysOpen = false,
+                AllowsTransparency = true,
+                Child = _listBox
+            };
 
             KeyDown += ThisKeyDown;
             KeyUp += ThisKeyUp;
