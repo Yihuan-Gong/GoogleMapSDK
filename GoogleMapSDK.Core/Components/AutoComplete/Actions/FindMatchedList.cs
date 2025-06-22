@@ -1,4 +1,4 @@
-﻿using GoogleMapSDK.Contract.Components.AutoComplete.Models;
+﻿using GoogleMapSDK.Core.Components.AutoComplete.Models;
 using GoogleMapSDK.Core.Components.AutoComplete.ViewLogic;
 using System;
 using System.Collections.Generic;
@@ -30,12 +30,12 @@ namespace GoogleMapSDK.Core.Components.AutoComplete.Actions
 
             string excludeText = _actionModel.Text;
 
-            if (_actionModel.ValuesTask == null || _actionModel.Text.Length == 0)
+            if (_actionModel.Config.GetValueTask == null || _actionModel.Text.Length == 0)
             {
                 _viewLogic.PresenterHideAutoCompleteBox();
                 return;
             }
-            _actionModel.Values = await _actionModel.ValuesTask;
+            _actionModel.Values = await _actionModel.Config.GetValueTask.Invoke(_actionModel.Text);
             _actionModel.Matched = _actionModel.Values.Keys.Where(x =>
             {
                 // 用.Contains比對比.StartsWith比對更符合GoogleMap模糊搜尋的運作方式

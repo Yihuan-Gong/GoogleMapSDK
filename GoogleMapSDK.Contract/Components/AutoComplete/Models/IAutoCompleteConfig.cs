@@ -16,6 +16,6 @@ namespace GoogleMapSDK.Contract.Components.AutoComplete.Models
         /// <summary>
         /// Auto complete選項的資料來源。
         /// </summary>
-        Task<Dictionary<string, T>> GetValuesAsync(string inputText);
+        Func<string, Task<Dictionary<string, T>>> GetValueTask { get; }
     }
 }

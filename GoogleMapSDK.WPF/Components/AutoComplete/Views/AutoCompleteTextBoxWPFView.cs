@@ -24,7 +24,8 @@ namespace GoogleMapSDK.WPF.Components.AutoComplete.Views
         public AutoCompleteTextBoxWPFView(IServiceProvider serviceProvider)
         {
             _viewLogic = serviceProvider.CreatePresenter<IAutoCompleteViewLogic<T>, AutoCompleteTextBoxWPFView<T>>(this);
-            
+            // _viewLogic.InitializeComponent();
+
             InitializeComponent();
         }
 
@@ -37,7 +38,6 @@ namespace GoogleMapSDK.WPF.Components.AutoComplete.Views
         {
             Text = text;
             SelectionStart = text.Length;
-            _config.AutoCompleteSelected?.Invoke(null, value);
         }
 
         public void ViewLogicHideAutoCompleteBox()
@@ -95,7 +95,7 @@ namespace GoogleMapSDK.WPF.Components.AutoComplete.Views
         {
             this.DebounceHandler(async () =>
             {
-                _viewLogic.Values = _config.GetValuesAsync(Text);
+                _viewLogic.Config = _config;
                 await _viewLogic.KeyUpAsync(Text);
             }, debounceTime: 500);
         }

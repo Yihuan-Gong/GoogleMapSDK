@@ -21,7 +21,7 @@ namespace GoogleMapSDK.Core.Components.AutoComplete.ViewLogic
             this.viewUI = viewUI;
         }
 
-        public Task<Dictionary<string, T>> Values {  set => presenter.Values = value; }
+        public IAutoCompleteConfig<T> Config { set => presenter.Config = value; }
 
         public void ChangeSelectedIndex(int index)
         {

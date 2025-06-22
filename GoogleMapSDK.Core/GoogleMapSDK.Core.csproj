@@ -88,6 +88,7 @@
     <Compile Include="Components\AutoComplete\Actions\ExcuteAutoComplete.cs" />
     <Compile Include="Components\AutoComplete\Actions\FindMatchedList.cs" />
     <Compile Include="Components\AutoComplete\Actions\IncreaseSelectedIndex.cs" />
+    <Compile Include="Components\AutoComplete\Models\ActionModel.cs" />
     <Compile Include="Components\AutoComplete\Models\GoogleMapAutoCompleteConfig.cs" />
     <Compile Include="Components\AutoComplete\Presenters\AutoCompletePresenter.cs" />
     <Compile Include="Components\AutoComplete\Presenters\IAutoCompletePresenter.cs" />

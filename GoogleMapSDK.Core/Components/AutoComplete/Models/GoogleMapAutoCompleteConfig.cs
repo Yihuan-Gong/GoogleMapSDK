@@ -26,10 +26,13 @@ namespace GoogleMapSDK.Core.Components.AutoComplete.Models
             };
         }
 
-        public async Task<Dictionary<string, PlaceSimpleModel>> GetValuesAsync(string inputText)
+        public Func<string, Task<Dictionary<string, PlaceSimpleModel>>> GetValueTask
         {
-            var response = await _api.PlaceService.AutoCompleteAsync(inputText);
-            return response.ToDictionary(x => x.Name);
+            get => async (inputText) =>
+            {
+                var response = await _api.PlaceService.AutoCompleteAsync(inputText);
+                return response.ToDictionary(x => x.Name);
+            };
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using GoogleMapSDK.Contract.Components.AutoComplete.Models;
+﻿using GoogleMapSDK.Core.Components.AutoComplete.Models;
 using GoogleMapSDK.Core.Components.AutoComplete.ViewLogic;
 using System;
 using System.Collections.Generic;
@@ -19,9 +19,11 @@ namespace GoogleMapSDK.Core.Components.AutoComplete.Actions
             if (actionModel.SelectedIndex == -1)
                 return;
 
-            string selected = actionModel.Matched[actionModel.SelectedIndex];
-            actionModel.FormerText = selected;
-            viewLogic.PresenterAutoCompleteExcuted(selected, actionModel.Values[selected]);
+            string selectedString = actionModel.Matched[actionModel.SelectedIndex];
+            T selectedObject = actionModel.Values[selectedString];
+            actionModel.FormerText = selectedString;
+            actionModel.Config.AutoCompleteSelected.Invoke(null, selectedObject);
+            viewLogic.PresenterAutoCompleteExcuted(selectedString, selectedObject);
             viewLogic.PresenterHideAutoCompleteBox();
         }
     }

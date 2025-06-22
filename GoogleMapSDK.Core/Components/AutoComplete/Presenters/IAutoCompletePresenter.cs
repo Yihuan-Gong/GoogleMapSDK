@@ -10,7 +10,7 @@ namespace GoogleMapSDK.Core.Components.AutoComplete.Presenters
     public interface IAutoCompletePresenter<T>
     {
         Dictionary<Keys, AutoCompleteAction> KeyAction { get; }
-        Task<Dictionary<string, T>> Values { set; }
+        IAutoCompleteConfig<T> Config { set; }
         void ChangeSelectedIndex(int index);
         Task KeyUpAsync(string text);
         void KeyDown(Keys key);

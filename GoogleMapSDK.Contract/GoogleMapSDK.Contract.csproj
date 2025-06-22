@@ -81,7 +81,6 @@
     <Compile Include="API\IGoogleMapAPI.cs" />
     <Compile Include="API\Services\IGeoCodingService.cs" />
     <Compile Include="API\Services\IPlaceService.cs" />
-    <Compile Include="Components\AutoComplete\Models\ActionModel.cs" />
     <Compile Include="Components\AutoComplete\Models\AutoCompleteAction.cs" />
     <Compile Include="Components\AutoComplete\Models\IAutoCompleteConfig.cs" />
     <Compile Include="Components\AutoComplete\Models\Keys.cs" />

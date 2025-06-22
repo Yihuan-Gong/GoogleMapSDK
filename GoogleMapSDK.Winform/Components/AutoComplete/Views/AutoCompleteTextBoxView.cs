@@ -29,7 +29,6 @@ namespace GoogleMapSDK.Winform.Components.AutoComplete.Views
         public void LoadView(IAutoCompleteConfig<T> config)
         {
             this.config = config;
-            
         }
 
         public void ViewLogicMathcedListFound(List<string> matched)
@@ -66,7 +65,6 @@ namespace GoogleMapSDK.Winform.Components.AutoComplete.Views
         {
             Text = text;
             SelectionStart = text.Length;
-            config.AutoCompleteSelected?.Invoke(null, value);
         }
 
         protected override bool IsInputKey(System.Windows.Forms.Keys keyData)
@@ -98,11 +96,11 @@ namespace GoogleMapSDK.Winform.Components.AutoComplete.Views
             viewLogic.KeyDown(Contract.Components.AutoComplete.Models.Keys.Enter);
         }
 
-        private async void ThisKeyUp(object sender, KeyEventArgs e)
+        private void ThisKeyUp(object sender, KeyEventArgs e)
         {
             this.DebounceHandler(async () =>
             {
-                viewLogic.Values = config.GetValuesAsync(Text);
+                viewLogic.Config = config;
                 await viewLogic.KeyUpAsync(Text);
             }, debounceTime: 500);
         }

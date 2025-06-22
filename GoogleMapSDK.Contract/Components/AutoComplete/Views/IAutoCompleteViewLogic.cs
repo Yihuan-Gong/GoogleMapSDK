@@ -9,7 +9,7 @@ namespace GoogleMapSDK.Contract.Components.AutoComplete.Views
 {
     public interface IAutoCompleteViewLogic<T>
     {
-        Task<Dictionary<string, T>> Values { set; }
+        IAutoCompleteConfig<T> Config { set; }
         void ChangeSelectedIndex(int index);
         Task KeyUpAsync(string text);
         void KeyDown(Keys key);

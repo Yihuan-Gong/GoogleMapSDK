@@ -1,6 +1,7 @@
 ﻿using GoogleMapSDK.Core.Components.AutoComplete.Actions;
-using GoogleMapSDK.Contract.Components.AutoComplete.Models;
+using GoogleMapSDK.Core.Components.AutoComplete.Models;
 using GoogleMapSDK.Core.Components.AutoComplete.ViewLogic;
+using GoogleMapSDK.Contract.Components.AutoComplete.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,10 +25,7 @@ namespace GoogleMapSDK.Core.Components.AutoComplete.Presenters
                 { Keys.Down, AutoCompleteAction.IncreaseSelectedIndex },
             };
 
-        public Task<Dictionary<string, T>> Values 
-        { 
-            set => _actionModel.ValuesTask = value; 
-        }
+        public IAutoCompleteConfig<T> Config { set => _actionModel.Config = value; }
 
         public AutoCompletePresenter(AutoCompleteViewLogic<T> viewLogic)
         {
