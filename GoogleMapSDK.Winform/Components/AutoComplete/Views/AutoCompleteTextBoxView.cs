@@ -22,13 +22,14 @@ namespace GoogleMapSDK.Winform.Components.AutoComplete.Views
 
         public AutoCompleteTextBoxView(IServiceProvider serviceProvider)
         {
-            viewLogic = serviceProvider.CreatePresenter<IAutoCompleteViewLogic<T>, AutoCompleteTextBoxView<T>>(this);
+            viewLogic = serviceProvider.CreatePresenter<IAutoCompleteViewLogic<T>, IAutoCompleteView<T>>(this);
             InitializeComponent();
         }
 
         public void LoadView(IAutoCompleteConfig<T> config)
         {
             this.config = config;
+            viewLogic.Config = config;
         }
 
         public void ViewLogicMathcedListFound(List<string> matched)
@@ -100,7 +101,6 @@ namespace GoogleMapSDK.Winform.Components.AutoComplete.Views
         {
             this.DebounceHandler(async () =>
             {
-                viewLogic.Config = config;
                 await viewLogic.KeyUpAsync(Text);
             }, debounceTime: 500);
         }

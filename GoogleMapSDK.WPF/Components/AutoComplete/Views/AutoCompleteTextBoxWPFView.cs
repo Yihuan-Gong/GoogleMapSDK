@@ -23,7 +23,7 @@ namespace GoogleMapSDK.WPF.Components.AutoComplete.Views
 
         public AutoCompleteTextBoxWPFView(IServiceProvider serviceProvider)
         {
-            _viewLogic = serviceProvider.CreatePresenter<IAutoCompleteViewLogic<T>, AutoCompleteTextBoxWPFView<T>>(this);
+            _viewLogic = serviceProvider.CreatePresenter<IAutoCompleteViewLogic<T>, IAutoCompleteView<T>>(this);
             // _viewLogic.InitializeComponent();
 
             InitializeComponent();
@@ -32,6 +32,7 @@ namespace GoogleMapSDK.WPF.Components.AutoComplete.Views
         public void LoadView(IAutoCompleteConfig<T> config)
         {
             _config = config;
+            _viewLogic.Config = _config;
         }
 
         public void ViewLogicAutoCompleteExcuted(string text, T value)
@@ -76,7 +77,8 @@ namespace GoogleMapSDK.WPF.Components.AutoComplete.Views
                 Child = _listBox
             };
 
-            KeyDown += ThisKeyDown;
+            // 這邊要找時間搞懂KeyUp和PreviewKeyUp
+            PreviewKeyDown += ThisKeyDown;
             KeyUp += ThisKeyUp;
         }
 
@@ -95,7 +97,6 @@ namespace GoogleMapSDK.WPF.Components.AutoComplete.Views
         {
             this.DebounceHandler(async () =>
             {
-                _viewLogic.Config = _config;
                 await _viewLogic.KeyUpAsync(Text);
             }, debounceTime: 500);
         }
