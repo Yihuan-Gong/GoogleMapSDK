@@ -14,9 +14,9 @@ namespace GoogleMapSDK.Contract.Components.AutoComplete.Views
         void InitializeComponent();
 
         // Send to presenter
-        void ChangeSelectedIndex(int index);
-        Task KeyUpAsync(string text);
-        void KeyDown(Keys key);
+        void InputSelectedIndex(int index);
+        Task InputKeyUpAsync(string text);
+        void InputKeyDown(Keys key);
 
         // Response from presenter
         void PresenterMatchedListFound(List<string> matched);

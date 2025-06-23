@@ -25,23 +25,23 @@ namespace GoogleMapSDK.Core.Components.AutoComplete.ViewLogic
 
         public void InitializeComponent()
         {
-            viewUI.CreateListBoxWithMouseClickEvent();
-            viewUI.ArrangePositionOfTextBoxAndListBox();
-            viewUI.SetKeyDownEventAtTextBox();
-            viewUI.SetKeyUpEventAtTextBox();
+            viewUI.InitializeListBoxWithMouseClickEvent();
+            viewUI.InitializePositionOfTextBoxAndListBox();
+            viewUI.InitializeKeyDownEventAtTextBox();
+            viewUI.InitializeKeyUpEventAtTextBox();
         }
 
-        public void ChangeSelectedIndex(int index)
+        public void InputSelectedIndex(int index)
         {
             presenter.ChangeSelectedIndex(index);
         }
 
-        public async Task KeyUpAsync(string text)
+        public async Task InputKeyUpAsync(string text)
         {
             await presenter.KeyUpAsync(text);
         }
 
-        public void KeyDown(Keys key)
+        public void InputKeyDown(Keys key)
         {
             presenter.KeyDown(key);
         }

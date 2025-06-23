@@ -58,13 +58,13 @@ namespace GoogleMapSDK.WPF.Components.AutoComplete.Views
                 _listBox.SelectedIndex = index;
         }
 
-        public void CreateListBoxWithMouseClickEvent()
+        public void InitializeListBoxWithMouseClickEvent()
         {
             _listBox = new ListBox();
             _listBox.MouseLeftButtonUp += ListBoxMouseLeftButtonClicked;
         }
 
-        public void ArrangePositionOfTextBoxAndListBox()
+        public void InitializePositionOfTextBoxAndListBox()
         {
             _popup = new Popup
             {
@@ -76,33 +76,34 @@ namespace GoogleMapSDK.WPF.Components.AutoComplete.Views
             };
         }
 
-        public void SetKeyDownEventAtTextBox()
+        public void InitializeKeyDownEventAtTextBox()
         {
-            // 這邊要找時間搞懂KeyUp和PreviewKeyUp
+            // 因為KeyDown是冒泡事件，事件傳遞由內而外，在TextBox改變完Text就會被擋住
+            // 所以這邊必須使用隧道事件PreviewKeyDown。事件傳遞由外而內，就不會被擋住。
             PreviewKeyDown += ThisKeyDown;
         }
 
-        public void SetKeyUpEventAtTextBox()
+        public void InitializeKeyUpEventAtTextBox()
         {
             KeyUp += ThisKeyUp;
         }
 
         private void ListBoxMouseLeftButtonClicked(object sender, MouseButtonEventArgs e)
         {
-            _viewLogic.ChangeSelectedIndex(_listBox.SelectedIndex);
-            _viewLogic.KeyDown(Keys.Enter);
+            _viewLogic.InputSelectedIndex(_listBox.SelectedIndex);
+            _viewLogic.InputKeyDown(Keys.Enter);
         }
 
         private void ThisKeyDown(object sender, KeyEventArgs e)
         {
-            _viewLogic.KeyDown(new Mapper<Key, Keys>().Map(e.Key));
+            _viewLogic.InputKeyDown(new Mapper<Key, Keys>().Map(e.Key));
         }
 
         private void ThisKeyUp(object sender, KeyEventArgs e)
         {
             this.DebounceHandler(async () =>
             {
-                await _viewLogic.KeyUpAsync(Text);
+                await _viewLogic.InputKeyUpAsync(Text);
             }, debounceTime: 500);
         }
     }

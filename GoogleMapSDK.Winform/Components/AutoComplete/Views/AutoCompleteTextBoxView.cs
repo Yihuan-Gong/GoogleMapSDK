@@ -23,40 +23,12 @@ namespace GoogleMapSDK.Winform.Components.AutoComplete.Views
         public AutoCompleteTextBoxView(IServiceProvider serviceProvider)
         {
             viewLogic = serviceProvider.CreatePresenter<IAutoCompleteViewLogic<T>, IAutoCompleteView<T>>(this);
-            
-            //InitializeComponent();
+            viewLogic.InitializeComponent();
         }
 
         public void LoadView(IAutoCompleteConfig<T> config)
         {
             viewLogic.Config = config;
-            viewLogic.InitializeComponent();
-        }
-
-        public void CreateListBoxWithMouseClickEvent()
-        {
-            _listBox = new ListBox
-            {
-                Left = Left,
-                Top = Top + Height
-            };
-            _listBox.MouseClick += ListBoxMouseClick;
-        }
-
-        public void ArrangePositionOfTextBoxAndListBox()
-        {
-            //Parent.Controls.Add(_listBox);
-            //HideListBox();
-        }
-
-        public void SetKeyDownEventAtTextBox()
-        {
-            KeyDown += ThisKeyDown;
-        }
-
-        public void SetKeyUpEventAtTextBox()
-        {
-            KeyUp += ThisKeyUp;
         }
 
         public void ShowNewMatchAtListBox(List<string> matched)
@@ -96,23 +68,49 @@ namespace GoogleMapSDK.Winform.Components.AutoComplete.Views
             SelectionStart = text.Length;
         }
 
+        public void InitializeListBoxWithMouseClickEvent()
+        {
+            _listBox = new ListBox
+            {
+                Left = Left,
+                Top = Top + Height
+            };
+            _listBox.MouseClick += ListBoxMouseClick;
+        }
+
+        public void InitializePositionOfTextBoxAndListBox()
+        {
+            //Parent.Controls.Add(_listBox);
+            //HideListBox();
+        }
+
+        public void InitializeKeyDownEventAtTextBox()
+        {
+            KeyDown += ThisKeyDown;
+        }
+
+        public void InitializeKeyUpEventAtTextBox()
+        {
+            KeyUp += ThisKeyUp;
+        }
+
         private void ListBoxMouseClick(object sender, MouseEventArgs e)
         {
-            viewLogic.ChangeSelectedIndex(_listBox.SelectedIndex);
-            viewLogic.KeyDown(Contract.Components.AutoComplete.Models.Keys.Enter);
+            viewLogic.InputSelectedIndex(_listBox.SelectedIndex);
+            viewLogic.InputKeyDown(Contract.Components.AutoComplete.Models.Keys.Enter);
         }
 
         private void ThisKeyUp(object sender, KeyEventArgs e)
         {
             this.DebounceHandler(async () =>
             {
-                await viewLogic.KeyUpAsync(Text);
+                await viewLogic.InputKeyUpAsync(Text);
             }, debounceTime: 500);
         }
 
         private void ThisKeyDown(object sender, KeyEventArgs e)
         {
-            viewLogic.KeyDown(
+            viewLogic.InputKeyDown(
                 new Mapper<System.Windows.Forms.Keys, Contract.Components.AutoComplete.Models.Keys>()
                 .Map(e.KeyCode));
         }

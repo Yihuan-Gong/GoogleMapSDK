@@ -18,9 +18,9 @@ namespace GoogleMapSDK.Contract.Components.AutoComplete.Views
         void HideListBox();
 
         // Initializations
-        void CreateListBoxWithMouseClickEvent();
-        void ArrangePositionOfTextBoxAndListBox();
-        void SetKeyDownEventAtTextBox();
-        void SetKeyUpEventAtTextBox();
+        void InitializeListBoxWithMouseClickEvent();
+        void InitializePositionOfTextBoxAndListBox();
+        void InitializeKeyDownEventAtTextBox();
+        void InitializeKeyUpEventAtTextBox();
     }
 }
