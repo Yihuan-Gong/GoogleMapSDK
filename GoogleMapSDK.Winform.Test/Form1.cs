@@ -21,7 +21,6 @@ namespace GoogleMapSDK.Winform.Test
 
             autoCompleteView.LoadView(autoCompleteConfig);
             this.Controls.Add(autoCompleteView as TextBox);
-
         }
     }
 }

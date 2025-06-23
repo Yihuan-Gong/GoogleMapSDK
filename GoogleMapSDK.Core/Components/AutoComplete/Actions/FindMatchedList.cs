@@ -32,7 +32,8 @@ namespace GoogleMapSDK.Core.Components.AutoComplete.Actions
 
             if (_actionModel.Config.GetValueTask == null || _actionModel.Text.Length == 0)
             {
-                _viewLogic.PresenterHideAutoCompleteBox();
+                //_viewLogic.PresenterHideAutoCompleteBox();
+                _viewLogic.PresenterMatchedListNull();
                 return;
             }
             _actionModel.Values = await _actionModel.Config.GetValueTask.Invoke(_actionModel.Text);
@@ -45,7 +46,8 @@ namespace GoogleMapSDK.Core.Components.AutoComplete.Actions
 
             if (_actionModel.Matched.Count == 0)
             {
-                _viewLogic.PresenterHideAutoCompleteBox();
+                //_viewLogic.PresenterHideAutoCompleteBox();
+                _viewLogic.PresenterMatchedListNull();
                 return;
             }
 

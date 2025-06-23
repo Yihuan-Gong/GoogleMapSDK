@@ -24,7 +24,7 @@ namespace GoogleMapSDK.Core.Components.AutoComplete.Actions
             actionModel.FormerText = selectedString;
             actionModel.Config.AutoCompleteSelected.Invoke(null, selectedObject);
             viewLogic.PresenterAutoCompleteExcuted(selectedString, selectedObject);
-            viewLogic.PresenterHideAutoCompleteBox();
+            //viewLogic.PresenterHideAutoCompleteBox();
         }
     }
 }

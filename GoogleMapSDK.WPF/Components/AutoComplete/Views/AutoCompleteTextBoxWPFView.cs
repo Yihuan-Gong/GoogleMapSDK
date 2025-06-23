@@ -16,37 +16,32 @@ namespace GoogleMapSDK.WPF.Components.AutoComplete.Views
     public class AutoCompleteTextBoxWPFView<T> : TextBox, IAutoCompleteView<T>
     {
         protected readonly IAutoCompleteViewLogic<T> _viewLogic;
-        protected IAutoCompleteConfig<T> _config;
         private Popup _popup;
         private ListBox _listBox;
-        private bool _isAdded;
 
         public AutoCompleteTextBoxWPFView(IServiceProvider serviceProvider)
         {
             _viewLogic = serviceProvider.CreatePresenter<IAutoCompleteViewLogic<T>, IAutoCompleteView<T>>(this);
-            // _viewLogic.InitializeComponent();
-
-            InitializeComponent();
+            _viewLogic.InitializeComponent();
         }
 
         public void LoadView(IAutoCompleteConfig<T> config)
         {
-            _config = config;
-            _viewLogic.Config = _config;
+            _viewLogic.Config = config;
         }
 
-        public void ViewLogicAutoCompleteExcuted(string text, T value)
+        public void ChangeTextAtTextBox(string text, T value)
         {
             Text = text;
             SelectionStart = text.Length;
         }
 
-        public void ViewLogicHideAutoCompleteBox()
+        public void HideListBox()
         {
             _popup.IsOpen = false;
         }
 
-        public void ViewLogicMathcedListFound(List<string> matched)
+        public void ShowNewMatchAtListBox(List<string> matched)
         {
             _listBox.ItemsSource = matched;
             _listBox.Width = Width;
@@ -57,17 +52,20 @@ namespace GoogleMapSDK.WPF.Components.AutoComplete.Views
             _popup.IsOpen = true;
         }
 
-        public void ViewLogicSelectedIndexChanged(int index)
+        public void ChangeSelectedIndexAtListBox(int index)
         {
             if (_listBox != null)
                 _listBox.SelectedIndex = index;
         }
 
-        private void InitializeComponent()
+        public void CreateListBoxWithMouseClickEvent()
         {
             _listBox = new ListBox();
             _listBox.MouseLeftButtonUp += ListBoxMouseLeftButtonClicked;
+        }
 
+        public void ArrangePositionOfTextBoxAndListBox()
+        {
             _popup = new Popup
             {
                 PlacementTarget = this,
@@ -76,9 +74,16 @@ namespace GoogleMapSDK.WPF.Components.AutoComplete.Views
                 AllowsTransparency = true,
                 Child = _listBox
             };
+        }
 
+        public void SetKeyDownEventAtTextBox()
+        {
             // 這邊要找時間搞懂KeyUp和PreviewKeyUp
             PreviewKeyDown += ThisKeyDown;
+        }
+
+        public void SetKeyUpEventAtTextBox()
+        {
             KeyUp += ThisKeyUp;
         }
 

@@ -18,6 +18,7 @@ namespace GoogleMapSDK.Core.Components.AutoComplete.Models
             _api = api;
         }
 
+        // 要想一下如果AutoCompleteSelected要通知其他IView的時候該怎麼做，架構才會比較漂亮
         public EventHandler<PlaceSimpleModel> AutoCompleteSelected
         {
             get => (s, place) =>

@@ -10,12 +10,18 @@ namespace GoogleMapSDK.Contract.Components.AutoComplete.Views
     public interface IAutoCompleteViewLogic<T>
     {
         IAutoCompleteConfig<T> Config { set; }
+
+        void InitializeComponent();
+
+        // Send to presenter
         void ChangeSelectedIndex(int index);
         Task KeyUpAsync(string text);
         void KeyDown(Keys key);
+
+        // Response from presenter
         void PresenterMatchedListFound(List<string> matched);
+        void PresenterMatchedListNull();
         void PresenterSelectedIndexChanged(int index);
-        void PresenterHideAutoCompleteBox();
         void PresenterAutoCompleteExcuted(string text, T value);
     }
 }

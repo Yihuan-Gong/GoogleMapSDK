@@ -23,6 +23,14 @@ namespace GoogleMapSDK.Core.Components.AutoComplete.ViewLogic
 
         public IAutoCompleteConfig<T> Config { set => presenter.Config = value; }
 
+        public void InitializeComponent()
+        {
+            viewUI.CreateListBoxWithMouseClickEvent();
+            viewUI.ArrangePositionOfTextBoxAndListBox();
+            viewUI.SetKeyDownEventAtTextBox();
+            viewUI.SetKeyUpEventAtTextBox();
+        }
+
         public void ChangeSelectedIndex(int index)
         {
             presenter.ChangeSelectedIndex(index);
@@ -40,22 +48,25 @@ namespace GoogleMapSDK.Core.Components.AutoComplete.ViewLogic
 
         public void PresenterMatchedListFound(List<string> matched)
         {
-            viewUI.ViewLogicMathcedListFound(matched);
+            viewUI.ShowNewMatchAtListBox(matched);
+        }
+
+        public void PresenterMatchedListNull()
+        {
+            viewUI.HideListBox();
         }
 
         public void PresenterSelectedIndexChanged(int index)
         {
-            viewUI.ViewLogicSelectedIndexChanged(index);
+            viewUI.ChangeSelectedIndexAtListBox(index);
         }
 
-        public void PresenterHideAutoCompleteBox()
-        {
-            viewUI.ViewLogicHideAutoCompleteBox();
-        }
+        
 
         public void PresenterAutoCompleteExcuted(string text, T value)
         {
-            viewUI.ViewLogicAutoCompleteExcuted(text, value);
+            viewUI.HideListBox();
+            viewUI.ChangeTextAtTextBox(text, value);
         }
     }
 }

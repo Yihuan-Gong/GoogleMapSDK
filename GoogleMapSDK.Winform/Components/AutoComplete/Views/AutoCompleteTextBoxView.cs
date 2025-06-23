@@ -23,22 +23,50 @@ namespace GoogleMapSDK.Winform.Components.AutoComplete.Views
         public AutoCompleteTextBoxView(IServiceProvider serviceProvider)
         {
             viewLogic = serviceProvider.CreatePresenter<IAutoCompleteViewLogic<T>, IAutoCompleteView<T>>(this);
-            InitializeComponent();
+            
+            //InitializeComponent();
         }
 
         public void LoadView(IAutoCompleteConfig<T> config)
         {
-            this.config = config;
             viewLogic.Config = config;
+            viewLogic.InitializeComponent();
         }
 
-        public void ViewLogicMathcedListFound(List<string> matched)
+        public void CreateListBoxWithMouseClickEvent()
+        {
+            _listBox = new ListBox
+            {
+                Left = Left,
+                Top = Top + Height
+            };
+            _listBox.MouseClick += ListBoxMouseClick;
+        }
+
+        public void ArrangePositionOfTextBoxAndListBox()
+        {
+            //Parent.Controls.Add(_listBox);
+            //HideListBox();
+        }
+
+        public void SetKeyDownEventAtTextBox()
+        {
+            KeyDown += ThisKeyDown;
+        }
+
+        public void SetKeyUpEventAtTextBox()
+        {
+            KeyUp += ThisKeyUp;
+        }
+
+        public void ShowNewMatchAtListBox(List<string> matched)
         {
             if (!_isAdded)
             {
                 Parent.Controls.Add(_listBox);
                 _isAdded = true;
             }
+
             _listBox.Visible = true;
             _listBox.BringToFront();
             _listBox.Items.Clear();
@@ -52,43 +80,20 @@ namespace GoogleMapSDK.Winform.Components.AutoComplete.Views
             _listBox.Width = this.Width;
         }
 
-        public void ViewLogicHideAutoCompleteBox()
+        public void HideListBox()
         {
             _listBox.Visible = false;
         }
 
-        public void ViewLogicSelectedIndexChanged(int index)
+        public void ChangeSelectedIndexAtListBox(int index)
         {
             _listBox.SelectedIndex = index;
         }
 
-        public void ViewLogicAutoCompleteExcuted(string text, T value)
+        public void ChangeTextAtTextBox(string text, T value)
         {
             Text = text;
             SelectionStart = text.Length;
-        }
-
-        protected override bool IsInputKey(System.Windows.Forms.Keys keyData)
-        {
-            switch (keyData)
-            {
-                case System.Windows.Forms.Keys.Tab:
-                    return true;
-                default:
-                    return base.IsInputKey(keyData);
-            }
-        }
-
-        private void InitializeComponent()
-        {
-            _listBox = new ListBox
-            {
-                Left = Left,
-                Top = Top + Height
-            };
-            _listBox.MouseClick += ListBoxMouseClick;
-            KeyDown += ThisKeyDown;
-            KeyUp += ThisKeyUp;
         }
 
         private void ListBoxMouseClick(object sender, MouseEventArgs e)
@@ -110,6 +115,17 @@ namespace GoogleMapSDK.Winform.Components.AutoComplete.Views
             viewLogic.KeyDown(
                 new Mapper<System.Windows.Forms.Keys, Contract.Components.AutoComplete.Models.Keys>()
                 .Map(e.KeyCode));
+        }
+
+        protected override bool IsInputKey(System.Windows.Forms.Keys keyData)
+        {
+            switch (keyData)
+            {
+                case System.Windows.Forms.Keys.Tab:
+                    return true;
+                default:
+                    return base.IsInputKey(keyData);
+            }
         }
     }
 }
