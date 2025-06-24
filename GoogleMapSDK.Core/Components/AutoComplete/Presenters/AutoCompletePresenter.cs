@@ -2,6 +2,7 @@
 using GoogleMapSDK.Core.Components.AutoComplete.Models;
 using GoogleMapSDK.Core.Components.AutoComplete.ViewLogic;
 using GoogleMapSDK.Contract.Components.AutoComplete.Models;
+using GoogleMapSDK.Contract.Components.AutoComplete.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace GoogleMapSDK.Core.Components.AutoComplete.Presenters
 {
     public class AutoCompletePresenter<T> : IAutoCompletePresenter<T>
     {
-        protected readonly AutoCompleteViewLogic<T> viewLogic;
+        protected readonly IAutoCompleteViewLogic<T> viewLogic;
         private readonly ActionModel<T> _actionModel;
 
         public virtual Dictionary<Keys, AutoCompleteAction> KeyAction =>
@@ -27,7 +28,7 @@ namespace GoogleMapSDK.Core.Components.AutoComplete.Presenters
 
         public IAutoCompleteConfig<T> Config { set => _actionModel.Config = value; }
 
-        public AutoCompletePresenter(AutoCompleteViewLogic<T> viewLogic)
+        public AutoCompletePresenter(IAutoCompleteViewLogic<T> viewLogic)
         {
             this.viewLogic = viewLogic;
             _actionModel = new ActionModel<T>();

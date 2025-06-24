@@ -1,4 +1,5 @@
-﻿using GoogleMapSDK.Core.Components.AutoComplete.Models;
+﻿using GoogleMapSDK.Contract.Components.AutoComplete.Views;
+using GoogleMapSDK.Core.Components.AutoComplete.Models;
 using GoogleMapSDK.Core.Components.AutoComplete.ViewLogic;
 using System;
 using System.Collections.Generic;
@@ -10,10 +11,10 @@ namespace GoogleMapSDK.Core.Components.AutoComplete.Actions
 {
     internal class FindMatchedList<T>
     {
-        private readonly AutoCompleteViewLogic<T> _viewLogic;
+        private readonly IAutoCompleteViewLogic<T> _viewLogic;
         private readonly ActionModel<T> _actionModel;
 
-        public FindMatchedList(AutoCompleteViewLogic<T> viewLogic, ActionModel<T> actionModel)
+        public FindMatchedList(IAutoCompleteViewLogic<T> viewLogic, ActionModel<T> actionModel)
         {
             _viewLogic = viewLogic;
             _actionModel = actionModel;

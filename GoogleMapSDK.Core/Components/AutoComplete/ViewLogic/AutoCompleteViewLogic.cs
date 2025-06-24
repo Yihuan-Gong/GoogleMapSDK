@@ -17,7 +17,7 @@ namespace GoogleMapSDK.Core.Components.AutoComplete.ViewLogic
 
         public AutoCompleteViewLogic(IServiceProvider serviceProvider, IAutoCompleteView<T> viewUI)
         {
-            presenter = serviceProvider.CreatePresenter<IAutoCompletePresenter<T>, AutoCompleteViewLogic<T>>(this);
+            presenter = serviceProvider.CreatePresenter<IAutoCompletePresenter<T>, IAutoCompleteViewLogic<T>>(this);
             this.viewUI = viewUI;
         }
 
