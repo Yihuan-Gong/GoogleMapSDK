@@ -24,6 +24,7 @@ namespace GoogleMapSDK.Winform.Components.AutoComplete.Views
         {
             viewLogic = serviceProvider.CreatePresenter<IAutoCompleteViewLogic<T>, IAutoCompleteView<T>>(this);
             viewLogic.InitializeComponent();
+            // InitializeComponent();
         }
 
         public void LoadView(IAutoCompleteConfig<T> config)
@@ -68,7 +69,7 @@ namespace GoogleMapSDK.Winform.Components.AutoComplete.Views
             SelectionStart = text.Length;
         }
 
-        public void InitializeListBoxWithMouseClickEvent()
+        public void InitializeSelectSuggestionByMouseEvent()
         {
             _listBox = new ListBox
             {
@@ -84,33 +85,33 @@ namespace GoogleMapSDK.Winform.Components.AutoComplete.Views
             //HideListBox();
         }
 
-        public void InitializeKeyDownEventAtTextBox()
+        public void InitializeSelectSuggestionByKeyEvent()
         {
             KeyDown += ThisKeyDown;
         }
 
-        public void InitializeKeyUpEventAtTextBox()
+        public void InitializeSearchSuggestionEvent()
         {
             KeyUp += ThisKeyUp;
         }
 
         private void ListBoxMouseClick(object sender, MouseEventArgs e)
         {
-            viewLogic.InputSelectedIndex(_listBox.SelectedIndex);
-            viewLogic.InputKeyDown(Contract.Components.AutoComplete.Models.Keys.Enter);
+            viewLogic.SelectSuggestion(_listBox.SelectedIndex);
+            viewLogic.SelectSuggestion(Contract.Components.AutoComplete.Models.Keys.Enter);
         }
 
         private void ThisKeyUp(object sender, KeyEventArgs e)
         {
             this.DebounceHandler(async () =>
             {
-                await viewLogic.InputKeyUpAsync(Text);
+                await viewLogic.SearchSuggestionAsync(Text);
             }, debounceTime: 500);
         }
 
         private void ThisKeyDown(object sender, KeyEventArgs e)
         {
-            viewLogic.InputKeyDown(
+            viewLogic.SelectSuggestion(
                 new Mapper<System.Windows.Forms.Keys, Contract.Components.AutoComplete.Models.Keys>()
                 .Map(e.KeyCode));
         }

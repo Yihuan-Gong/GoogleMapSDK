@@ -11,8 +11,8 @@ namespace GoogleMapSDK.Core.Components.AutoComplete.Presenters
     {
         Dictionary<Keys, AutoCompleteAction> KeyAction { get; }
         IAutoCompleteConfig<T> Config { set; }
-        void ChangeSelectedIndex(int index);
-        Task KeyUpAsync(string text);
-        void KeyDown(Keys key);
+        void SelectSuggestion(int index);
+        void SelectSuggestion(Keys key);
+        Task SearchSuggestionAsync(string text);
     }
 }

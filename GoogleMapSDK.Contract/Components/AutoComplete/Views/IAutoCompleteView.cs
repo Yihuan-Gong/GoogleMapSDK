@@ -10,17 +10,17 @@ namespace GoogleMapSDK.Contract.Components.AutoComplete.Views
     public interface IAutoCompleteView<T>
     {
         void LoadView(IAutoCompleteConfig<T> config);
-        
-        // Response from view logic
+
+        // UI Input
+        void InitializeComponent(
+            Action<int> selectSuggestionByMouse,
+            Action<Keys> selectSuggestionByKey,
+            Action<string> searchSuggestion);
+
+        // UI Update 
         void ShowNewMatchAtListBox(List<string> matched);
         void ChangeSelectedIndexAtListBox(int index);
         void ChangeTextAtTextBox(string text, T value);
         void HideListBox();
-
-        // Initializations
-        void InitializeListBoxWithMouseClickEvent();
-        void InitializePositionOfTextBoxAndListBox();
-        void InitializeKeyDownEventAtTextBox();
-        void InitializeKeyUpEventAtTextBox();
     }
 }

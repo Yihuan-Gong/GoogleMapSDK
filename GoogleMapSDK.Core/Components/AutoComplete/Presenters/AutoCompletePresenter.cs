@@ -34,20 +34,20 @@ namespace GoogleMapSDK.Core.Components.AutoComplete.Presenters
             _actionModel = new ActionModel<T>();
         }
 
-        public void ChangeSelectedIndex(int index)
+        public void SelectSuggestion(int index)
         {
             _actionModel.SelectedIndex = index;
             viewLogic.PresenterSelectedIndexChanged(_actionModel.SelectedIndex);
         }
 
-        public async Task KeyUpAsync(string text)
+        public async Task SearchSuggestionAsync(string text)
         {
             _actionModel.Text = text;
             var action = new FindMatchedList<T>(viewLogic, _actionModel);
             await action.ExcuteAsync();
         }
 
-        public void KeyDown(Keys key)
+        public void SelectSuggestion(Keys key)
         {
             if (!KeyAction.ContainsKey(key))
                 return;

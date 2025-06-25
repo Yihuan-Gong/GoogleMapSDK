@@ -19,32 +19,32 @@ namespace GoogleMapSDK.Core.Components.AutoComplete.ViewLogic
         {
             presenter = serviceProvider.CreatePresenter<IAutoCompletePresenter<T>, IAutoCompleteViewLogic<T>>(this);
             this.viewUI = viewUI;
+
+            // 如果是需要很多次元件，這邊也是將所有從容器拿到的ISubComponentView放到InitializeComponent(()
+            // 交給個平台去自由安排這些次元件如何放上UI
+            this.viewUI.InitializeComponent(SelectSuggestionByMouse, SelectSuggestionByKey, SearchSuggestionAsync);
+
+            // 後面還可以將ISubViewA的輸出事件去綁定ISubViewB的LoadData()，來管理次元件間的互相合作
         }
 
         public IAutoCompleteConfig<T> Config { set => presenter.Config = value; }
 
-        public void InitializeComponent()
+        private void SelectSuggestionByMouse(int index)
         {
-            viewUI.InitializeListBoxWithMouseClickEvent();
-            viewUI.InitializePositionOfTextBoxAndListBox();
-            viewUI.InitializeKeyDownEventAtTextBox();
-            viewUI.InitializeKeyUpEventAtTextBox();
+            presenter.SelectSuggestion(index);
         }
 
-        public void InputSelectedIndex(int index)
+        private void SelectSuggestionByKey(Keys key)
         {
-            presenter.ChangeSelectedIndex(index);
+            presenter.SelectSuggestion(key);
         }
 
-        public async Task InputKeyUpAsync(string text)
+        // 這邊可以了解一下為何async void會work
+        private async void SearchSuggestionAsync(string text)
         {
-            await presenter.KeyUpAsync(text);
+            await presenter.SearchSuggestionAsync(text);
         }
 
-        public void InputKeyDown(Keys key)
-        {
-            presenter.KeyDown(key);
-        }
 
         public void PresenterMatchedListFound(List<string> matched)
         {
@@ -60,8 +60,6 @@ namespace GoogleMapSDK.Core.Components.AutoComplete.ViewLogic
         {
             viewUI.ChangeSelectedIndexAtListBox(index);
         }
-
-        
 
         public void PresenterAutoCompleteExcuted(string text, T value)
         {
