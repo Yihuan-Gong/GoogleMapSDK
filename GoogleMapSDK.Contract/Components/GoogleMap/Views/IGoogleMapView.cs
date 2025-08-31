@@ -12,10 +12,9 @@ namespace GoogleMapSDK.Contract.Components.GoogleMap
 {
     public interface IGoogleMapView
     {
-        void AddMarker(LocationModel location, GMarkerGoogleType markerType = GMarkerGoogleType.arrow,
-            ToolTipModel toolTip = null, string overlayId = null);
+        void AddMarker(LocationModel location, MarkerType marker = MarkerType.arrow, string overlayId = null);
 
-        void AddRoute(string encodedPolyline, Pen routePen = null, string overlayId = null);
+        void AddRoute(string encodedPolyline, Color color = Color.Navy, double thickness = 5, string overlayId = null);
 
         void ShowAll();
 

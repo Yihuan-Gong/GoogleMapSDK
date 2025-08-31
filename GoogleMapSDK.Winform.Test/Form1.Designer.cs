@@ -28,13 +28,54 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.searchBoxFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.mapFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // searchBoxFlowLayoutPanel
+            // 
+            this.searchBoxFlowLayoutPanel.Location = new System.Drawing.Point(71, 84);
+            this.searchBoxFlowLayoutPanel.Name = "searchBoxFlowLayoutPanel";
+            this.searchBoxFlowLayoutPanel.Size = new System.Drawing.Size(849, 165);
+            this.searchBoxFlowLayoutPanel.TabIndex = 0;
+            // 
+            // mapFlowLayoutPanel
+            // 
+            this.mapFlowLayoutPanel.Location = new System.Drawing.Point(72, 382);
+            this.mapFlowLayoutPanel.Name = "mapFlowLayoutPanel";
+            this.mapFlowLayoutPanel.Size = new System.Drawing.Size(847, 814);
+            this.mapFlowLayoutPanel.TabIndex = 1;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(72, 289);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(120, 51);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 27F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(971, 1237);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.mapFlowLayoutPanel);
+            this.Controls.Add(this.searchBoxFlowLayoutPanel);
+            this.Name = "Form1";
             this.Text = "Form1";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.FlowLayoutPanel searchBoxFlowLayoutPanel;
+        private System.Windows.Forms.FlowLayoutPanel mapFlowLayoutPanel;
+        private System.Windows.Forms.Button button1;
     }
 }
 

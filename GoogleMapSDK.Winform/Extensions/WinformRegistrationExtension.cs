@@ -1,4 +1,10 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using GoogleMapSDK.Contract.Components.GoogleMap.Components.Marker;
+using GoogleMapSDK.Contract.Components.GoogleMap.Components.Overlay;
+using GoogleMapSDK.Contract.Components.GoogleMap.Components.Route;
+using GoogleMapSDK.Winform.Components.GoogleMap.Components.Marker;
+using GoogleMapSDK.Winform.Components.GoogleMap.Components.Overlay;
+using GoogleMapSDK.Winform.Components.GoogleMap.Components.Route;
+using Microsoft.Extensions.DependencyInjection;
 using MVPExtension;
 using System;
 using System.Collections.Generic;
@@ -13,6 +19,10 @@ namespace GoogleMapSDK.Winform.Extensions
         public static void AddWinformRegistration(this IServiceCollection serviceCollection)
         {
             serviceCollection.RegisterAllViewsAndPresenters(null);
+
+            serviceCollection.AddTransient<IGoogleMapMarker, GoogleMapMarker>();
+            serviceCollection.AddTransient<IGoogleMapRoute, GoogleMapRoute>();
+            serviceCollection.AddTransient<IGoogleMapOverlay, GoogleMapOverlay>();
         }
     }
 }

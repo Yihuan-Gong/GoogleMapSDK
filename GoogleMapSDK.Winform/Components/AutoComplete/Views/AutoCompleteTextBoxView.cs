@@ -23,13 +23,27 @@ namespace GoogleMapSDK.Winform.Components.AutoComplete.Views
         public AutoCompleteTextBoxView(IServiceProvider serviceProvider)
         {
             viewLogic = serviceProvider.CreatePresenter<IAutoCompleteViewLogic<T>, IAutoCompleteView<T>>(this);
-            viewLogic.InitializeComponent();
-            // InitializeComponent();
         }
 
         public void LoadView(IAutoCompleteConfig<T> config)
         {
             viewLogic.Config = config;
+        }
+
+        public void InitializeComponent(
+            Action<int> selectSuggestionByMouse, 
+            Action<Contract.Components.AutoComplete.Models.Keys> selectSuggestionByKey, 
+            Action<string> searchSuggestion)
+        {
+            _listBox = new ListBox
+            {
+                Left = Left,
+                Top = Top + Height
+            };
+
+            InitializeSelectSuggestionByMouseEvent(selectSuggestionByMouse);
+            InitializeSelectSuggestionByKeyEvent(selectSuggestionByKey);
+            InitializeSearchSuggestionEvent(searchSuggestion);
         }
 
         public void ShowNewMatchAtListBox(List<string> matched)
@@ -69,51 +83,31 @@ namespace GoogleMapSDK.Winform.Components.AutoComplete.Views
             SelectionStart = text.Length;
         }
 
-        public void InitializeSelectSuggestionByMouseEvent()
+        private void InitializeSelectSuggestionByMouseEvent(Action<int> selectSuggestionByMouse)
         {
-            _listBox = new ListBox
+            _listBox.MouseClick += (s, e) =>
             {
-                Left = Left,
-                Top = Top + Height
+                selectSuggestionByMouse.Invoke(_listBox.SelectedIndex);
             };
-            _listBox.MouseClick += ListBoxMouseClick;
         }
 
-        public void InitializePositionOfTextBoxAndListBox()
+        private void InitializeSelectSuggestionByKeyEvent(
+            Action<Contract.Components.AutoComplete.Models.Keys> selectSuggestionByKey)
         {
-            //Parent.Controls.Add(_listBox);
-            //HideListBox();
-        }
-
-        public void InitializeSelectSuggestionByKeyEvent()
-        {
-            KeyDown += ThisKeyDown;
-        }
-
-        public void InitializeSearchSuggestionEvent()
-        {
-            KeyUp += ThisKeyUp;
-        }
-
-        private void ListBoxMouseClick(object sender, MouseEventArgs e)
-        {
-            viewLogic.SelectSuggestion(_listBox.SelectedIndex);
-            viewLogic.SelectSuggestion(Contract.Components.AutoComplete.Models.Keys.Enter);
-        }
-
-        private void ThisKeyUp(object sender, KeyEventArgs e)
-        {
-            this.DebounceHandler(async () =>
+            KeyDown += (s, e) =>
             {
-                await viewLogic.SearchSuggestionAsync(Text);
-            }, debounceTime: 500);
+                selectSuggestionByKey
+                    .Invoke(new Mapper<System.Windows.Forms.Keys, Contract.Components.AutoComplete.Models.Keys>()
+                    .Map(e.KeyCode));
+            };
         }
 
-        private void ThisKeyDown(object sender, KeyEventArgs e)
+        private void InitializeSearchSuggestionEvent(Action<string> searchSuggestion)
         {
-            viewLogic.SelectSuggestion(
-                new Mapper<System.Windows.Forms.Keys, Contract.Components.AutoComplete.Models.Keys>()
-                .Map(e.KeyCode));
+            KeyUp += (s, e) =>
+            {
+                this.DebounceHandler(() => searchSuggestion.Invoke(Text), debounceTime: 500);
+            };
         }
 
         protected override bool IsInputKey(System.Windows.Forms.Keys keyData)

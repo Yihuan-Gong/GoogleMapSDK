@@ -119,6 +119,11 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Components\AutoComplete\Views\AutoCompleteTextBoxWPFView.cs" />
+    <Compile Include="Components\GoogleMap\Components\Marker\GoogleMapMarker.cs" />
+    <Compile Include="Components\GoogleMap\Components\Overlay\GoogleMapOverlay.cs" />
+    <Compile Include="Components\GoogleMap\Components\Route\GoogleMapRoute.cs" />
+    <Compile Include="Components\GoogleMap\Views\GoogleMapView.cs" />
+    <Compile Include="Extensions\ColorExtension.cs" />
     <Compile Include="Extensions\ControlDebounceExtension.cs" />
     <Compile Include="Extensions\WPFRegistrationExtension.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -159,6 +164,7 @@
       <Name>GoogleMapSDK.Contract</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

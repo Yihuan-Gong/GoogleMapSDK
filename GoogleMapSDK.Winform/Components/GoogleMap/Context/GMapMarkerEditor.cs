@@ -22,6 +22,7 @@ namespace GoogleMapSDK.Winform.Components.GoogleMap.Context
             ToolTipModel toolTip = null, string overlayId = null)
         {
             GMapOverlay overlay = GetOrCreateOverlay(overlayId);
+            
             GMapMarker gMapMarker = new GMarkerGoogle(LocationConversion(location), markerType);
             
             if (toolTip != null)
@@ -29,7 +30,7 @@ namespace GoogleMapSDK.Winform.Components.GoogleMap.Context
                 var toolTipInstance = new GMapToolTip(gMapMarker);
                 MemberCopier.Copy(toolTip, toolTipInstance);
 
-                gMapMarker.ToolTipText = toolTip.Text;
+                //gMapMarker.ToolTipText = toolTip.Text;
                 gMapMarker.ToolTip = toolTipInstance;
             }
 

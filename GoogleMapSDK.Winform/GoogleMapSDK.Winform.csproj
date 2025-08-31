@@ -101,6 +101,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\GoogleMap\Components\Marker\GoogleMapMarker.cs" />
+    <Compile Include="Components\GoogleMap\Components\Overlay\GoogleMapOverlay.cs" />
+    <Compile Include="Components\GoogleMap\Components\Route\GoogleMapRoute.cs" />
     <Compile Include="Components\GoogleMap\Context\GMapEditor.cs" />
     <Compile Include="Components\GoogleMap\Context\GMapMarkerEditor.cs" />
     <Compile Include="Components\GoogleMap\Context\GMapRouteEditor.cs" />
@@ -108,6 +111,7 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Components\GoogleMap\Utilities\MemberCopier.cs" />
+    <Compile Include="Extensions\ColorExtension.cs" />
     <Compile Include="Extensions\ControlExtension.cs" />
     <Compile Include="Extensions\WinformRegistrationExtension.cs" />
     <Compile Include="Components\AutoComplete\Views\AutoCompleteTextBoxView.cs">

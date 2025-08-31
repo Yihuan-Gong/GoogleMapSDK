@@ -1,54 +1,56 @@
 ﻿using GMap.NET;
+using GMap.NET.MapProviders;
 using GMap.NET.ObjectModel;
 using GMap.NET.WindowsForms;
-using GMap.NET.WindowsForms.Markers;
-using GoogleMapSDK.Winform.Components.GoogleMap.Context;
-using GoogleMapSDK.Contract.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using GoogleMapSDK.Contract.Components.GoogleMap.Models;
 using GoogleMapSDK.Contract.Components.GoogleMap;
+using GoogleMapSDK.Contract.Components.GoogleMap.Components.Overlay;
+using GoogleMapSDK.Contract.Components.GoogleMap.Models;
+using GoogleMapSDK.Contract.Components.GoogleMap.Services;
+using GoogleMapSDK.Contract.Models;
+using GoogleMapSDK.Winform.Components.GoogleMap.Components.Overlay;
+using System;
+using System.Windows.Forms;
 
 namespace GoogleMapSDK.Map
 {
     public class GoogleMapControler : GMapControl, IGoogleMapView
     {
-        private readonly Dictionary<string, GMapOverlay> _overlays
-            = new Dictionary<string, GMapOverlay>();
+        private readonly IOverlayService _overlayService;
 
         public event EventHandler<LocationModel> OnMapLocationClick;
 
-        public GoogleMapControler()
+        public GoogleMapControler(IOverlayService overlayService)
         {
-           base.OnMapClick += MapClicked;
+            _overlayService = overlayService;
+            base.OnMapClick += MapClicked;
+
+            MapProvider = GMapProviders.GoogleMap; // 设置地图源
+            MinZoom = 0;
+            MaxZoom = 24;
+            Zoom = 12;
+            Position = new PointLatLng(25, 121); // 地图中心位置
+            ScaleMode = ScaleModes.Fractional;
+            DragButton = MouseButtons.Left;
+            Size = new System.Drawing.Size(400, 400);
         }
 
-        public void AddMarker(LocationModel location, GMarkerGoogleType markerType = GMarkerGoogleType.arrow, 
-            ToolTipModel toolTip = null, string overlayId = null)
+        public void AddMarker(LocationModel location, MarkerType marker = MarkerType.arrow, string overlayId = null)
         {
-            var editor = new GMapMarkerEditor(_overlays);
-            editor.AddMarker(location, markerType, toolTip, overlayId);
+            _overlayService.AddMarker(location, marker, overlayId);
         }
 
-        public void AddRoute(string encodedPolyline, Pen routePen = null, string overlayId = null)
+        public void AddRoute(string encodedPolyline, Color color = Color.Navy, double thickness = 5, string overlayId = null)
         {
-            var editor = new GMapRouteEditor(_overlays);
-            editor.AddRoute(encodedPolyline, routePen, overlayId);
+            _overlayService.AddRoute(encodedPolyline, color, thickness, overlayId);
         }
 
         public void ShowAll()
         {
             Overlays.Clear();
 
-            foreach (var overlayPair in _overlays)
+            foreach (var overlayPair in _overlayService.Overlays)
             {
-                Overlays.Add(overlayPair.Value);
+                Overlays.Add(GetOverlay(overlayPair.Value));
             }
 
             RefreshMap();
@@ -83,10 +85,15 @@ namespace GoogleMapSDK.Map
 
         private GMapOverlay GetOverlay(string overlayId)
         {
-            if (_overlays.ContainsKey(overlayId))
-                return _overlays[overlayId];
+            if (_overlayService.Overlays.ContainsKey(overlayId))
+                return GetOverlay(_overlayService.Overlays[overlayId]);
 
             return null;
+        }
+
+        private GMapOverlay GetOverlay(IGoogleMapOverlay overlay)
+        {
+            return ((GoogleMapOverlay)overlay).Overlay;
         }
 
         private void MapClicked(PointLatLng loc, MouseEventArgs e)

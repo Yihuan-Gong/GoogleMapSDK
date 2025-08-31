@@ -93,6 +93,7 @@
     <Compile Include="Components\AutoComplete\Presenters\AutoCompletePresenter.cs" />
     <Compile Include="Components\AutoComplete\Presenters\IAutoCompletePresenter.cs" />
     <Compile Include="Components\AutoComplete\ViewLogic\AutoCompleteViewLogic.cs" />
+    <Compile Include="Components\GoogleMap\OverlayService.cs" />
     <Compile Include="Extensions\CoreRegistrationExtension.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -111,5 +112,6 @@
       <Name>GoogleMapSDK.Contract</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
